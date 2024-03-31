@@ -1,0 +1,29 @@
+<div class="page">
+    <div>{{ countryToGuessName }}</div>
+
+    <div>
+        <p-autoComplete [(ngModel)]="guessedCountry" [suggestions]="results" (completeMethod)="search($event)" [dropdown]="true" (keyup.enter)="autocomplete()"></p-autoComplete>
+        <button pButton (click)="validateGuess()">Check Answer</button>
+    </div>
+
+    <div class="guessed-countries">
+      <p-table [value]="alreadyGuessedCountries" responsiveLayout="scroll" [hidden]="numberOfGuesses==0">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Region</th>
+            <th>Area</th>
+            <th>Population</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-country>
+          <tr>
+            <td>{{country.name.common}}</td>
+            <td>{{country.region}} <i [className]="getRegionClass(country)"></i></td>
+            <td>{{country.area}} <i [className]="getAreaClass(country)"></i></td>
+            <td>{{country.population}} <i [className]="getPopulationClass(country)"></i></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+</div>
